@@ -47,6 +47,9 @@ apt-get -y install dnsutils
 You can find the ip address of your current container by doing ip a. For example, my container's ip is 172.17.0.2.:
 ```
 ip a
+```
+
+```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
