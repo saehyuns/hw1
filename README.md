@@ -84,7 +84,7 @@ adduser [username]
 ```
 Make sure to follow the onscreen instructions!
 ```
-su ly
+su [username]
 cd
 ```
 ## How to Install Homework 1 Program
