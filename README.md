@@ -48,14 +48,15 @@ ip a
     link/tunnel6 :: brd ::
 6: eth0@if7: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
     link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet 
-```
-172.17.0.2/16 brd 172.17.255.255 
-```
-scope global eth0
+    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
        valid_lft forever preferred_lft forever
 ```
-
+You can also ping the address of your container or other containers that you have created by using the ping:
+```
+ping 172.18.0.3
+```
+Professor Lipyeow Lim provides us with a very good demonstration of setting up a docker container and pinging:
+[![OH NO SOMETHING WENT WRONG](http://img.youtube.com/vi/YHL_TaSC_hk/0.jpg)](http://www.youtube.com/watch?feature=player_embedded&v=YHL_TaSC_hk)
 
 # Overview
 
