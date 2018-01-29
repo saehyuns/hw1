@@ -1,6 +1,7 @@
 # Homework 1: DDL Processing for a Parallel DBMS
 * [Installation](#installation)
   * [Install Docker Containers](#install-docker-containers)
+  * [Setup a Docker Container](#setup-a-docker-container)
 * [Overview](#overview)
   * [Program Structure](#program-structure)
   * [Input Config Files and Parameters](#input-config-files-and-parameters)
@@ -17,6 +18,17 @@ First, download the Docker Community Edition (CE) for the Desktop from their [do
 Secondly, follow their instructions at their [Getting Started Page](https://docs.docker.com/get-started/).
 
 If you want [hands-on tutorials](https://docs.docker.com/get-started/) or would like to use their [training videos and online playground](http://training.play-with-docker.com/), please feel free to do so.
+
+## Setup a Docker Container
+First, open up a terminal or command prompt window and cd to the designated Docker directory:
+```
+cd Desktop/Docker
+```
+After you're in your designated Docker directory, start your own container. In this case, I named my container "myContainer" and started it up with Ubuntu:
+```
+docker run -it --name=[myContainer] ubuntu
+```
+
 
 # Overview
 
