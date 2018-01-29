@@ -2,8 +2,10 @@
 * [Installation](#installation)
   * [Install Docker Containers](#install-docker-containers)
   * [Setup a Docker Container](#setup-a-docker-container)
+  * [Setup Python](#setup-python)
+  * [Install Homework 1 Program](#install-homework-1-program)
 * [Overview](#overview)
-  * [Program Structure](#program-structure)
+  * [Directory Structure](#directory-structure)
   * [Input Config Files and Parameters](#input-config-files-and-parameters)
   * [Expected Output and Error Conditions](#expected-output-and-error-conditions)
 * [Cheat Sheets](#cheat-sheets)
@@ -58,9 +60,33 @@ ping 172.18.0.3
 Professor Lipyeow Lim provides us with a very good demonstration of setting up a docker container and pinging:
 [![OH NO SOMETHING WENT WRONG](http://img.youtube.com/vi/YHL_TaSC_hk/0.jpg)](http://www.youtube.com/watch?feature=player_embedded&v=YHL_TaSC_hk)
 
+## Setup Python
+Now that we've installed the packages we need, let's also install Python3, package installer, vim, and sqlite3:
+```
+apt-get -y install python3
+apt-get -y install python3-pip
+apt-get -y install vim
+apt-get -y install sqlite3
+```
+Since it is not a good practice to work in root, let's create a user account:
+```
+adduser [username]
+```
+Make sure to follow the onscreen instructions!
+```
+su ly
+cd
+mkdir [directory name]
+cd [directory name]
+```
+Leave the terminal or command prompt open and go to my [github page](https://github.com/saehyuns/hw1) and download the zip containing my homework 1 files.
+
+Now start up a new terminal or command prompt tab or window and go to your designated docker directory:
+
+
 # Overview
 
-## Program Structure
+## Directory Structure
 
 ## Input Config Files and Parameters
 
