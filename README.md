@@ -101,7 +101,7 @@ Now go back to your container and cd into the hw1-master directory and voila we'
 Go to the catalog directory and start up the server, default hostname: 127.0.0.1 and port: 5000:
 ```
 cd catalog
-python3 parDBd.py
+python3 parDBd.py &
 ```
 
 Go to the node1 directory and start up the server with the commandline arguments that match the cluster.cfg file's hostname and port number:
