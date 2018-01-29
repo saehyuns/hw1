@@ -12,6 +12,8 @@
     * [Configuration Files](#configuration-files)
     * [Client Program](#client-program)
   * [Expected Output and Error Conditions](#expected-output-and-error-conditions)
+    * [Expected Output](#expected-output)
+    * [Error Conditions](#error-conditions)
 * [Cheat Sheets](#cheat-sheets)
   * [Docker Cheat Sheet](#docker-cheat-sheet)
   * [Linux Cheat Sheet](#linux-cheat-sheet)
@@ -93,7 +95,44 @@ docker cp /Users/SaeHyunSong/Desktop/Docker [Container Name]:/home/[user name]/
 Now go back to your container and cd into the hw1 directory and voila we're all done with the installation process!
 
 ## How to Run Homework 1 Program
+Go to the catalog directory and start up the server, default hostname: 127.0.0.1 and port: 5000:
+```
+cd catalog
+python3 parDBd.py
+```
 
+Go to the node1 directory and start up the server with the commandline arguments that match the cluster.cfg file's hostname and port number:
+```
+cd node1
+python3 parDBd.py 127.0.0.2 5000 &
+```
+
+Go to the node2 directory and start up the server with the commandline arguments that match the cluster.cfg file's hostname and port number:
+```
+cd node2
+python3 parDBd.py 127.0.0.3 5000 &
+```
+
+Go back to the hw1 directory and run the shell script run.sh:
+```
+./run.sh cluster.cfg books.sql
+```
+You should then see the [expected output](#expected-output).
+
+If you want to do this again, make sure to delete the tables in the mydb1 and mydb2 databases by doing:
+```
+cd node1
+sqlite3 mydb1
+DROP TABLE BOOKS;
+.exit
+
+cd ../node2
+sqlite3 mydb2
+DROP TABLE BOOKS;
+.exit
+```
+Then run everything from top to bottom. 
+If you get any errors, refer to the [Error Conditions Section](#error-conditions).
 
 # Overview
 
@@ -395,6 +434,8 @@ runDDL(argv);
 The runDDL program takes in two commandline arguments which are cluster.cfg and books.sql. It will then parse the books.sql file and insert it into an array called ddlCommands. It also will parse the cluster.cfg file and store them into an array called data. Which then I create a loop for each data to split them and place each value in their respective variables and append that data into a Node class. Then I store each instance of the Node class that was created into the nodes array. Finally, I loop through each each node and send the data that was parsed from the cluster.cfg and books.sql file to the node servers and print out the message I receive from the server of whether or not it was successful. If it was successful, it will send that data to the catalog node to update the database there with the metadata. Otherwise, it will not send anything and just print out that the catalog was not updated. 
 
 ## Expected Output and Error Conditions
+
+### Expected Output
 The expected output should be:
 ```
 [127.0.0.2:5000/mydb1]: ./books.sql success.
@@ -403,6 +444,7 @@ The expected output should be:
 [127.0.0.1:5000/mycatdb]: catalog updated.
 ```
 
+### Error Conditions
 An error condition would be if the ip address or hostname is inputted wrong / doesn't match the cluster.cfg file when using commandline arguments, it will give a connection refused error:
 ```
 Traceback (most recent call last):
