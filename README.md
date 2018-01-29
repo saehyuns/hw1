@@ -1,4 +1,5 @@
 # Homework 1: DDL Processing for a Parallel DBMS
+* [Homework 1 Page](https://lipyeow.github.io/ics421s18/morea/pardb/experience-hw1.html)
 * [Installation](#installation)
   * [Install Docker Containers](#install-docker-containers)
   * [Setup a Docker Container](#setup-a-docker-container)
@@ -131,7 +132,7 @@ sqlite3 mydb2
 DROP TABLE BOOKS;
 .exit
 ```
-Then run everything from top to bottom. 
+Then run everything again from the [beginning](#how-to-run-homework-1-program).
 If you get any errors, refer to the [Error Conditions Section](#error-conditions).
 
 # Overview
