@@ -3,10 +3,11 @@
   * [Install Docker Containers](#install-docker-containers)
   * [Setup a Docker Container](#setup-a-docker-container)
   * [Setup Python](#setup-python)
-  * [Install Homework 1 Program](#install-homework-1-program)
+  * [How to Install Homework 1 Program](#how-to-install-homework-1-program)
+  * [How to Run Homework 1 Program](#how-to-run-homework-1-program)
 * [Overview](#overview)
   * [Directory Structure](#directory-structure)
-  * [Input Config Files and Parameters](#input-config-files-and-parameters)
+  * [File and Program Descriptions](#file-and-program-descriptions)
   * [Expected Output and Error Conditions](#expected-output-and-error-conditions)
 * [Cheat Sheets](#cheat-sheets)
   * [Docker Cheat Sheet](#docker-cheat-sheet)
@@ -79,16 +80,137 @@ cd
 mkdir [directory name]
 cd [directory name]
 ```
-Leave the terminal or command prompt open and go to my [github page](https://github.com/saehyuns/hw1) and download the zip containing my homework 1 files.
+## How to Install Homework 1 Program
+Leave the terminal or command prompt open and go to my [github page](https://github.com/saehyuns/hw1). Download the zip containing my homework 1 files and store / unzip it into the designated docker directory.
 
-Now start up a new terminal or command prompt tab or window and go to your designated docker directory:
+Now start up a new terminal or command prompt tab or window and go to your designated docker directory, and copy the files into your container. In my case:
+```
+docker cp /Users/SaeHyunSong/Desktop/Docker [Container Name]:/home/[user name]/
+```
+Now go back to your container and cd into the hw1 directory and voila we're all done with the installation process!
+
+## How to Run Homework 1 Program
 
 
 # Overview
 
 ## Directory Structure
+The top-level directory structure contains:
+```
+catalog/          # Holds the sqlite3 database mycatdb and the server program.
+  mycatdb         # The sqlite3 database called mycatdb.
+  parDBd.py       # The server program for the catalog node.
+  
+node1/            # Holds the sqlite3 database mydb1 and the server program.
+  mydb1           # The sqlite3 database called mydb1.
+  parDBd.py       # The server program for the node1 node.
+  
+node2/            # Holds the sqlite3 database mydb2 and the server program.
+  mydb2           # The sqlite3 database called mydb2.
+  parDBd.py       # The server program for the node2 node.
+  
+README.md         # Contains information about installation and files.
+cluster.cfg       # A configuration file that contains information about the nodes.
+books.sql         # Contains a DDL command which is used to run on the node's database.
+run.sh            # A shell script to run runDDL.py with two commandline arguments cluster.cfg and books.sql
+runDDL.py         # Contains the main source code to parse config file and sql file and send info to the node servers.
+```
 
-## Input Config Files and Parameters
+## File and Program Descriptions
+### Server Files
+There are three server files one for each node called parDBd.py along with their own sqlite3 database:
+```
+catalog/          # Holds the sqlite3 database mycatdb and the server program.
+  mycatdb         # The sqlite3 database called mycatdb.
+  parDBd.py       # The server program for the catalog node.
+  
+node1/            # Holds the sqlite3 database mydb1 and the server program.
+  mydb1           # The sqlite3 database called mydb1.
+  parDBd.py       # The server program for the node1 node.
+  
+node2/            # Holds the sqlite3 database mydb2 and the server program.
+  mydb2           # The sqlite3 database called mydb2.
+  parDBd.py       # The server program for the node2 node.
+```
+The node1 and node2 directory has the same server program but different database names:
+```
+node1/            # Holds the sqlite3 database mydb1 and the server program.
+  mydb1           # The sqlite3 database called mydb1.
+  parDBd.py       # The server program for the node1 node.
+  
+node2/            # Holds the sqlite3 database mydb2 and the server program.
+  mydb2           # The sqlite3 database called mydb2.
+  parDBd.py       # The server program for the node2 node.
+```
+The parDBd.py program for node1/ and node2/ contains:
+```
+# Importing all the necessary libraries.
+import socket
+
+import sqlite3
+from sqlite3 import Error
+
+import sys
+from sys import argv
+
+# A main function that takes in two commandline arguments.
+def Main(argv):
+    host = argv[1];
+    port = argv[2];
+    #host = "127.0.0.2";
+    #port = 5000;
+
+    # Store data received into datas array.
+    datas = [];
+
+    mySocket = socket.socket()
+    mySocket.bind((str(host),int(port)))
+
+    mySocket.listen(1)
+    conn, addr = mySocket.accept()
+    # print ("Server: Connection from " + str(addr))
+    data = conn.recv(1024).decode()
+    # print("DATA:", data);
+    if not data:
+        return
+    # print ("Server: recv " + str(data));
+    datas.append(data.split("$")[0]);
+    datas.append(data.split("$")[1]);
+
+    # Connect to sqlite database in node1 directory and execute DDL command.
+    try:
+        condb = sqlite3.connect("../node2" + datas[0]);
+        # print(sqlite3.version);
+        cur = condb.cursor();
+        cur.execute(datas[1]);
+        message = "./books.sql success.$" + host + ":" +  str(port) + datas[0];
+        condb.commit();
+        conn.send(message.encode());
+    # If there is an error, send a message back to client that it was a failure.
+    except Error as e:
+        # print(e);
+        message = "./books.sql failure.$" + host + ":" + str(port) + datas[0];
+        conn.send(message.encode());
+    # After everything, finally close the db and the connection between client / server.
+    finally:
+        condb.close();
+        conn.close();
+# Run main function with argv parameters (commandline arguments)
+Main(argv);
+```
+What this server program is basically doing is that it takes in two commandline arguments: IP address or hostname, and the port number. It uses those command line arguments to generate a socket with that ip address and port number. The socket will then listen for any data sent to it. Using the data it has received, it will connect to it's sqlite3 database with the data containing the database name. Execute the DDL statement that was sent along with the database name. Which then it will send a message back to the client program that it was successful or not. Then it finally closes all the connections after everything has been done. 
+
+The catalog directory has a slightly different server program compared to the node1 and node2 servers:
+```
+catalog/          # Holds the sqlite3 database mycatdb and the server program.
+  mycatdb         # The sqlite3 database called mycatdb.
+  parDBd.py       # The server program for the catalog node.
+```
+The parDBd.py program for catalog/ contains: 
+
+
+### Config Files
+### Client Program
 
 ## Expected Output and Error Conditions
 
