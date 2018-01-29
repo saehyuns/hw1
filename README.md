@@ -7,7 +7,7 @@
   * [Program Structure](#program-structure)
   * [Input Config Files and Parameters](#input-config-files-and-parameters)
   * [Expected Output and Error Conditions](#expected-output-and-error-conditions)
-* [Cheat Sheets](cheat-sheets)
+* [Cheat Sheets](#cheat-sheets)
 
 # Installation
 
