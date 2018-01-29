@@ -1,13 +1,13 @@
 # Homework 1: DDL Processing for a Parallel DBMS
 * [Installation](#installation)
   * [Install Docker Containers](#install-docker-containers)
-    * [Docker Cheat Sheet](#docker-cheat-sheet)
-    * [Linux Cheat Sheet](#linux-cheat-sheet)
 * [Overview](#overview)
   * [Program Structure](#program-structure)
   * [Input Config Files and Parameters](#input-config-files-and-parameters)
   * [Expected Output and Error Conditions](#expected-output-and-error-conditions)
 * [Cheat Sheets](#cheat-sheets)
+  * [Docker Cheat Sheet](#docker-cheat-sheet)
+  * [Linux Cheat Sheet](#linux-cheat-sheet)
 
 # Installation
 
