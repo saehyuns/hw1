@@ -48,7 +48,11 @@ ip a
     link/tunnel6 :: brd ::
 6: eth0@if7: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
     link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet **172.17.0.2/16** brd 172.17.255.255 scope global eth0
+    inet 
+```
+172.17.0.2/16 brd 172.17.255.255 
+```
+scope global eth0
        valid_lft forever preferred_lft forever
 ```
 
