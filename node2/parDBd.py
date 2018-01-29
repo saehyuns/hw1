@@ -22,19 +22,19 @@ def Main(argv):
 
     mySocket.listen(1)
     conn, addr = mySocket.accept()
-    print ("Server: Connection from " + str(addr))
+    # print ("Server: Connection from " + str(addr))
     data = conn.recv(1024).decode()
-    print("DATA:", data);
+    # print("DATA:", data);
     if not data:
         return
-    print ("Server: recv " + str(data));
+    # print ("Server: recv " + str(data));
     datas.append(data.split("$")[0]);
     datas.append(data.split("$")[1]);
 
     # Connect to sqlite database in node1 directory and execute DDL command.
     try:
         condb = sqlite3.connect("../node2" + datas[0]);
-        print(sqlite3.version);
+        # print(sqlite3.version);
         cur = condb.cursor();
         cur.execute(datas[1]);
         message = "./books.sql success.$" + host + ":" +  str(port) + datas[0];
@@ -42,7 +42,7 @@ def Main(argv):
         conn.send(message.encode());
     # If there is an error, send a message back to client that it was a failure.
     except Error as e:
-        print(e);
+        # print(e);
         message = "./books.sql failure.$" + host + ":" + str(port) + datas[0];
         conn.send(message.encode());
     # After everything, finally close the db and the connection between client / server.

@@ -7,7 +7,7 @@ from sqlite3 import Error
 # A Main function which listens for a message from the nodes to create catalog db and update the db.
 def Main():
     # Host / port initialized with constant values.
-    host = "127.0.0.1"
+    host = "127.0.0.5"
     port = 5000
 
     # Messages received will be store in datas array.
@@ -18,11 +18,11 @@ def Main():
 
     mySocket.listen(1)
     conn, addr = mySocket.accept()
-    print ("Server: Connection from " + str(addr))
+    # print ("Server: Connection from " + str(addr))
     data = conn.recv(1024).decode()
     if not data:
         return
-    print ("Server: recv " + str(data));
+    # print ("Server: recv " + str(data));
     datap = data.split("$");
     # Connect to the mycatdb sqlite3 database and execute a create table / insert DDL command.
     try:
@@ -35,7 +35,7 @@ def Main():
         conn.send(message.encode()); 
     # If there is an error send back an error message to client.
     except Error as e:
-        print(e);
+        # print(e);
         message = e;
         conn.send(message.encode()); 
         con.close(); 
