@@ -86,8 +86,6 @@ Make sure to follow the onscreen instructions!
 ```
 su ly
 cd
-mkdir [directory name]
-cd [directory name]
 ```
 ## How to Install Homework 1 Program
 Leave the terminal or command prompt open and go to my [github page](https://github.com/saehyuns/hw1). Download the zip containing my homework 1 files and store / unzip it into the designated docker directory.
