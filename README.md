@@ -28,6 +28,29 @@ After you're in your designated Docker directory, start your own container. In t
 ```
 docker run -it --name=[myContainer] ubuntu
 ```
+Since the base Ubuntu image only has the bare minimal packages installed, we will need to install some more packages:
+```
+apt-get -y update
+apt-get -y install iputils-ping
+apt-get -y install iproute
+apt-get -y install dnsutils
+```
+You can find the ip address of your current container by doing ip a. For example, my container's ip is 172.17.0.2.:
+```
+ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: tunl0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1
+    link/ipip 0.0.0.0 brd 0.0.0.0
+3: ip6tnl0@NONE: <NOARP> mtu 1452 qdisc noop state DOWN group default qlen 1
+    link/tunnel6 :: brd ::
+6: eth0@if7: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
+    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet **172.17.0.2/16** brd 172.17.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+```
 
 
 # Overview
