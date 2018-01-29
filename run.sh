@@ -1,1 +1,1 @@
-python3 hw1.py $1 $2
+python3 runDDL.py $1 $2
