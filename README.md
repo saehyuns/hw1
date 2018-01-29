@@ -93,7 +93,7 @@ Leave the terminal or command prompt open and go to my [github page](https://git
 Now start up a new terminal or command prompt tab or window and go to your designated docker directory, and copy the files into your container. In my case:
 ```
 cd Desktop/Docker
-docker cp /Users/SaeHyunSong/Desktop/Docker [Container Name]:/home/[user name]/
+docker cp /Users/SaeHyunSong/Desktop/Docker/hw1-master [Container Name]:/home/[user name]/
 ```
 Now go back to your container and cd into the hw1 directory and voila we're all done with the installation process!
 
