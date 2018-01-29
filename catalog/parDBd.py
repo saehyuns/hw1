@@ -7,7 +7,7 @@ from sqlite3 import Error
 # A Main function which listens for a message from the nodes to create catalog db and update the db.
 def Main():
     # Host / port initialized with constant values.
-    host = "127.0.0.5"
+    host = "127.0.0.1"
     port = 5000
 
     # Messages received will be store in datas array.
