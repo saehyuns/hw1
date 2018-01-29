@@ -95,7 +95,7 @@ Now start up a new terminal or command prompt tab or window and go to your desig
 cd Desktop/Docker
 docker cp /Users/SaeHyunSong/Desktop/Docker/hw1-master [Container Name]:/home/[user name]/
 ```
-Now go back to your container and cd into the hw1 directory and voila we're all done with the installation process!
+Now go back to your container and cd into the hw1-master directory and voila we're all done with the installation process!
 
 ## How to Run Homework 1 Program
 Go to the catalog directory and start up the server, default hostname: 127.0.0.1 and port: 5000:
