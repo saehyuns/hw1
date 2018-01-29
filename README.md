@@ -99,7 +99,7 @@ docker cp /Users/SaeHyunSong/Desktop/Docker/hw1-master [Container Name]:/home/[u
 Now go back to your container and cd into the hw1-master directory and voila we're all done with the installation process!
 
 ## How to Run Homework 1 Program
-Go to the catalog directory and start up the server, default hostname: 127.0.0.1 and port: 5000:
+Go to the catalog directory and start up the server, default hostname: 127.0.0.10 and port: 5000:
 ```
 cd catalog
 python3 parDBd.py &
